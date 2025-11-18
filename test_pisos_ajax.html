@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Pisos AJAX</title>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+</head>
+<body>
+    <h2>Test AJAX - Pisos</h2>
+    <button onclick="testPisos()">Cargar Pisos</button>
+    <div id="resultado"></div>
+
+    <script>
+    function testPisos() {
+        const idExpediente = 15; // Cambia por tu ID
+        
+        console.log('Probando cargar pisos para expediente:', idExpediente);
+        
+        $.ajax({
+            url: 'ajax/piso.ajax.php',
+            method: 'POST',
+            data: {
+                accion: 'listar',
+                id_expediente: idExpediente
+            },
+            dataType: 'json',
+            success: function(pisos) {
+                console.log('✓ Pisos recibidos:', pisos);
+                $('#resultado').html('<pre>' + JSON.stringify(pisos, null, 2) + '</pre>');
+            },
+            error: function(xhr, status, error) {
+                console.error('✗ Error:', error);
+                console.error('Response:', xhr.responseText);
+                $('#resultado').html('<p style="color:red;">Error: ' + error + '<br>' + xhr.responseText + '</p>');
+            }
+        });
+    }
+    </script>
+</body>
+</html>

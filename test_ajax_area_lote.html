@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test AJAX Área Lote</title>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+</head>
+<body>
+    <h2>Test AJAX - Área de Lote</h2>
+    <button onclick="testMostrar()">Test Mostrar</button>
+    <div id="resultado"></div>
+
+    <script>
+    function testMostrar() {
+        console.log('Probando AJAX...');
+        
+        $.ajax({
+            url: 'ajax/area_lote_normativo.ajax.php',
+            method: 'POST',
+            data: {
+                accion: 'mostrar',
+                id_expediente: 15  // Cambia por tu ID
+            },
+            dataType: 'json',
+            success: function(response) {
+                console.log('✓ Respuesta:', response);
+                $('#resultado').html('<pre>' + JSON.stringify(response, null, 2) + '</pre>');
+            },
+            error: function(xhr, status, error) {
+                console.error('✗ Error:', error);
+                console.error('Response:', xhr.responseText);
+                $('#resultado').html('<p style="color:red;">Error: ' + error + '<br>' + xhr.responseText + '</p>');
+            }
+        });
+    }
+    </script>
+</body>
+</html>
