@@ -1,0 +1,167 @@
+<?php
+require_once "../controladores/expediente.controlador.php";
+require_once "../modelos/expediente.modelo.php";
+
+class AjaxExpediente {
+    
+    public function ajaxCrearEditarExpediente() {
+        
+        $accion = $_POST['accion'] ?? '';
+        
+        if ($accion === 'crear') {
+            $this->crearExpediente();
+        } elseif ($accion === 'editar') {
+            $this->editarExpediente();
+        } elseif ($accion === 'obtener') {
+            $this->obtenerExpediente();
+        } elseif ($accion === 'eliminar') {
+            $this->eliminarExpediente();
+        }
+    }
+    
+    private function crearExpediente() {
+        // Generar número de expediente si está vacío
+        $numero_expediente = !empty($_POST['numero_expediente']) 
+            ? $_POST['numero_expediente'] 
+            : $this->generarNumeroExpediente();
+        
+        $datos = array(
+            "numero_expediente" => $numero_expediente,
+            "propietario" => $_POST['propietario'] ?? '',
+            "domicilio_legal" => $_POST['domicilio_legal'] ?? null,
+            "representante_legal" => $_POST['representante_legal'] ?? null,
+            "copropietarios" => $_POST['copropietarios'] ?? null,
+            "copropietario" => $_POST['copropietario'] ?? null,
+            "tipo_tramite" => $_POST['tipo_tramite'] ?? 'PROYECTO',
+            "tipo_obra" => $_POST['tipo_obra'] ?? 'OBRA NUEVA',
+            "municipalidad" => $_POST['municipalidad'] ?? 'TRUJILLO',
+            "rru" => $_POST['rru'] ?? null,
+            "zonificacion" => $_POST['zonificacion'] ?? null,
+            "ubicacion" => $_POST['ubicacion'] ?? null,
+            "estructura_urbana" => $_POST['estructura_urbana'] ?? null,
+            "datos_terreno" => $_POST['datos_terreno'] ?? null,
+            "partida_electronica" => $_POST['partida_electronica'] ?? null,
+            "area_terreno" => !empty($_POST['area_terreno']) ? $_POST['area_terreno'] : null,
+            "frente" => !empty($_POST['frente']) ? $_POST['frente'] : null,
+            "derecha" => !empty($_POST['derecha']) ? $_POST['derecha'] : null,
+            "izquierda" => !empty($_POST['izquierda']) ? $_POST['izquierda'] : null,
+            "fondo" => !empty($_POST['fondo']) ? $_POST['fondo'] : null
+        );
+        
+        $respuesta = ControladorExpediente::ctrCrearExpediente($datos);
+        
+        if ($respuesta == "ok") {
+            echo json_encode(array(
+                "success" => true,
+                "message" => "✓ Expediente creado exitosamente: " . $numero_expediente
+            ));
+        } else {
+            echo json_encode(array(
+                "success" => false,
+                "message" => "Error al crear el expediente: " . $respuesta
+            ));
+        }
+    }
+    
+    private function editarExpediente() {
+        $datos = array(
+            "id_expediente" => $_POST['id_expediente'],
+            "numero_expediente" => $_POST['numero_expediente'] ?? '',
+            "propietario" => $_POST['propietario'] ?? '',
+            "domicilio_legal" => $_POST['domicilio_legal'] ?? null,
+            "representante_legal" => $_POST['representante_legal'] ?? null,
+            "copropietarios" => $_POST['copropietarios'] ?? null,
+            "copropietario" => $_POST['copropietario'] ?? null,
+            "tipo_tramite" => $_POST['tipo_tramite'] ?? 'PROYECTO',
+            "tipo_obra" => $_POST['tipo_obra'] ?? 'OBRA NUEVA',
+            "municipalidad" => $_POST['municipalidad'] ?? 'TRUJILLO',
+            "rru" => $_POST['rru'] ?? null,
+            "zonificacion" => $_POST['zonificacion'] ?? null,
+            "ubicacion" => $_POST['ubicacion'] ?? null,
+            "estructura_urbana" => $_POST['estructura_urbana'] ?? null,
+            "datos_terreno" => $_POST['datos_terreno'] ?? null,
+            "partida_electronica" => $_POST['partida_electronica'] ?? null,
+            "area_terreno" => !empty($_POST['area_terreno']) ? $_POST['area_terreno'] : null,
+            "frente" => !empty($_POST['frente']) ? $_POST['frente'] : null,
+            "derecha" => !empty($_POST['derecha']) ? $_POST['derecha'] : null,
+            "izquierda" => !empty($_POST['izquierda']) ? $_POST['izquierda'] : null,
+            "fondo" => !empty($_POST['fondo']) ? $_POST['fondo'] : null
+        );
+        
+        $respuesta = ControladorExpediente::ctrEditarExpediente($datos);
+        
+        if ($respuesta == "ok") {
+            echo json_encode(array(
+                "success" => true,
+                "message" => "✓ Expediente actualizado exitosamente"
+            ));
+        } else {
+            echo json_encode(array(
+                "success" => false,
+                "message" => "Error al actualizar el expediente"
+            ));
+        }
+    }
+    
+    private function obtenerExpediente() {
+        $item = "id_expediente";
+        $valor = $_POST['id_expediente'];
+        
+        $respuesta = ControladorExpediente::ctrMostrarExpediente($item, $valor);
+        
+        if (!empty($respuesta)) {
+            echo json_encode(array(
+                "success" => true,
+                "data" => $respuesta[0]
+            ));
+        } else {
+            echo json_encode(array(
+                "success" => false,
+                "message" => "No se encontró el expediente"
+            ));
+        }
+    }
+    
+    private function eliminarExpediente() {
+        $id = $_POST['id_expediente'];
+        $respuesta = ControladorExpediente::ctrEliminarExpediente($id);
+        
+        if ($respuesta == "ok") {
+            echo json_encode(array(
+                "success" => true,
+                "message" => "✓ Expediente eliminado exitosamente"
+            ));
+        } else {
+            echo json_encode(array(
+                "success" => false,
+                "message" => "Error al eliminar el expediente"
+            ));
+        }
+    }
+    
+    private function generarNumeroExpediente() {
+        // Obtener el último número de expediente
+        $ultimo = ControladorExpediente::ctrObtenerUltimoNumero();
+        
+        if ($ultimo && isset($ultimo['numero_expediente'])) {
+            // Extraer el número del formato PRECAL-000007-2025
+            preg_match('/PRECAL-(\d+)-(\d{4})/', $ultimo['numero_expediente'], $matches);
+            
+            if ($matches) {
+                $numero = intval($matches[1]) + 1;
+                $anio = date('Y');
+            } else {
+                $numero = 1;
+                $anio = date('Y');
+            }
+        } else {
+            $numero = 1;
+            $anio = date('Y');
+        }
+        
+        return sprintf("PRECAL-%06d-%s", $numero, $anio);
+    }
+}
+
+$ajax = new AjaxExpediente();
+$ajax->ajaxCrearEditarExpediente();
