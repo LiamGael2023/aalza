@@ -1,0 +1,173 @@
+2025-10-20 04:32:25 - Inicio
+POST: Array
+(
+    [accion] => mostrar
+    [id_expediente] => 15
+)
+
+Archivos cargados correctamente
+Acción recibida: mostrar
+Ejecutando mostrar...
+Mostrar ejecutado
+2025-10-20 04:32:25 - Fin
+
+2025-10-20 04:32:32 - Inicio
+POST: Array
+(
+    [accion] => mostrar
+    [id_expediente] => 15
+)
+
+Archivos cargados correctamente
+Acción recibida: mostrar
+Ejecutando mostrar...
+Mostrar ejecutado
+2025-10-20 04:32:32 - Fin
+
+2025-10-20 04:32:37 - Inicio
+POST: Array
+(
+    [accion] => guardar
+    [id_expediente] => 15
+    [uso_normativo] => Vivienda Unifamiliar
+    [uso_proyecto] => Vivienda Unifamiliar
+    [observaciones] => 
+)
+
+Archivos cargados correctamente
+Acción recibida: guardar
+Ejecutando guardar...
+Guardar ejecutado
+2025-10-20 04:32:37 - Fin
+
+2025-10-20 04:32:39 - Inicio
+POST: Array
+(
+    [accion] => mostrar
+    [id_expediente] => 15
+)
+
+Archivos cargados correctamente
+Acción recibida: mostrar
+Ejecutando mostrar...
+Mostrar ejecutado
+2025-10-20 04:32:39 - Fin
+
+2025-10-20 04:37:50 - Inicio
+POST: Array
+(
+    [accion] => eliminar
+    [id_uso] => 1
+)
+
+Archivos cargados correctamente
+Acción recibida: eliminar
+Ejecutando eliminar...
+Eliminar ejecutado
+2025-10-20 04:37:50 - Fin
+
+2025-10-20 04:37:51 - Inicio
+POST: Array
+(
+    [accion] => mostrar
+    [id_expediente] => 15
+)
+
+Archivos cargados correctamente
+Acción recibida: mostrar
+Ejecutando mostrar...
+Mostrar ejecutado
+2025-10-20 04:37:51 - Fin
+
+2025-10-20 05:00:14 - Inicio
+POST: Array
+(
+    [accion] => mostrar
+    [id_expediente] => 15
+)
+
+Archivos cargados correctamente
+Acción recibida: mostrar
+Ejecutando mostrar...
+2025-10-20 05:00:20 - Inicio
+POST: Array
+(
+    [accion] => guardar
+    [id_expediente] => 15
+    [uso_normativo] => Vivienda Unifamiliar
+    [uso_proyecto] => Vivienda Unifamiliar
+    [observaciones] => 
+)
+
+Archivos cargados correctamente
+Acción recibida: guardar
+Ejecutando guardar...
+Guardar ejecutado
+2025-10-20 05:00:20 - Fin
+
+2025-10-20 05:00:21 - Inicio
+POST: Array
+(
+    [accion] => mostrar
+    [id_expediente] => 15
+)
+
+Archivos cargados correctamente
+Acción recibida: mostrar
+Ejecutando mostrar...
+2025-10-20 05:00:30 - Inicio
+POST: Array
+(
+    [accion] => mostrar
+    [id_expediente] => 15
+)
+
+Archivos cargados correctamente
+Acción recibida: mostrar
+Ejecutando mostrar...
+2025-10-20 05:01:44 - Inicio
+POST: Array
+(
+    [accion] => mostrar
+    [id_expediente] => 15
+)
+
+Archivos cargados correctamente
+Acción recibida: mostrar
+Ejecutando mostrar...
+2025-10-20 05:01:49 - Inicio
+POST: Array
+(
+    [accion] => guardar
+    [id_expediente] => 15
+    [uso_normativo] => Vivienda Unifamiliar
+    [uso_proyecto] => Vivienda Unifamiliar
+    [observaciones] => 
+)
+
+Archivos cargados correctamente
+Acción recibida: guardar
+Ejecutando guardar...
+Guardar ejecutado
+2025-10-20 05:01:49 - Fin
+
+2025-10-20 05:01:51 - Inicio
+POST: Array
+(
+    [accion] => mostrar
+    [id_expediente] => 15
+)
+
+Archivos cargados correctamente
+Acción recibida: mostrar
+Ejecutando mostrar...
+2025-10-20 05:02:29 - Inicio
+POST: Array
+(
+    [accion] => mostrar
+    [id_expediente] => 15
+)
+
+Archivos cargados correctamente
+Acción recibida: mostrar
+Ejecutando mostrar...
